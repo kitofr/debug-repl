@@ -17,6 +17,19 @@ form to be evaled, something like this:
      `(let ~(generate-local-bindings locals)
         ~form)))
 ```
+## INSTALLATION
+```clojure
+[debug-repl "0.3.2"]
+```
+
+Maven
+```xml
+   <dependency>
+  <groupId>debug-repl</groupId>
+  <artifactId>debug-repl</artifactId>
+  <version>0.3.2</version>
+</dependency>
+```
 
 ## Use
 The interface is meant to be dead simple:
