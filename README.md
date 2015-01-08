@@ -24,7 +24,7 @@ form to be evaled, something like this:
 
 Maven
 ```xml
-   <dependency>
+<dependency>
   <groupId>debug-repl</groupId>
   <artifactId>debug-repl</artifactId>
   <version>0.3.2</version>
