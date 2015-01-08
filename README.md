@@ -38,13 +38,14 @@ The interface is meant to be dead simple:
 That's about it.  When you enter the debug-repl, the regular
 repl prompt will be replaced with 
 
-```
+```clojure
 dr =>
 ```
 
 An example will make it clearer:
 
-```
+```clojure
+user=>(use 'alex-and-georges.debug-repl)
 user=> (let [c 1 d 2]
     (defn a [b c]
      (debug-repl)
