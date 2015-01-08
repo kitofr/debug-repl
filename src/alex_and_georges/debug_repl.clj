@@ -115,7 +115,7 @@ values."
          (binding [level (inc level)]
            (clojure.main/repl
             ;;:prompt #(print (str (blue "dr-") (red level) "-" (cyan counter#) " => "))
-            :prompt #(print (str "dr-" level "-" counter# " => "))
+            :prompt #(print (str (red "dr-") (blue level) "-" (cyan counter#) " => "))
             :eval eval-fn#
             :read dr-read
             :caught caught))
