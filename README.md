@@ -1,38 +1,44 @@
-The Clojure debug-repl 
+# The Clojure debug-repl 
 
-Every time I stick a println into some Clojure code to debug it, I
-think to myself, "This is Lisp! I should be able to insert a repl
-here!"
+Every time I stick a _println_ into some Clojure code to debug it, I
+think to myself:
+
+__"This is Lisp! I should be able to insert a repl here!"__
 
 The problem is of course that Clojure's eval function doesn't know
 about the surrounding lexical scope.  How to solve the problem?
 Create a macro that passes a copy of the lexical scope in with the
 form to be evaled, something like this:
 
+```clojure
 (defn eval-with-locals
   [locals form]
     (eval
      `(let ~(generate-local-bindings locals)
         ~form)))
+```
 
-USE:
+## Use
 The interface is meant to be dead simple:
 "(use 'alex-and-georges.debug-repl)" loads it, and "(debug-repl)" invokes it.
 
 That's about it.  When you enter the debug-repl, the regular
 repl prompt will be replaced with 
 
+```
 dr =>
+```
 
 An example will make it clearer:
 
-user=>   (let [c 1 d 2]
+```
+user=> (let [c 1 d 2]
     (defn a [b c]
-      (debug-repl)
-      d))
+     (debug-repl)
+     d))
 #'user/a
 
-user=>   (a "foo" "bar")
+user=> (a "foo" "bar")
 
 dr-1-1001 => c
 "bar"
@@ -48,9 +54,9 @@ dr-1-1001 => (str b c)
 
 dr-1-1001 => ()
 2
-user=> 
+```
 
-LIMITATIONS:
+## Limitations:
 The debug-repl doesn't currently integrate properly
 with the slime-repl, (I think because of how Slime manages IO
 redirection,) so you'll have to invoke it from a regular repl, or
