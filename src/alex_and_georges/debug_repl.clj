@@ -46,7 +46,9 @@
 ;; to access to the lexical scope of the local frame.
 
 (ns alex-and-georges.debug-repl
-  [:require clojure.main])
+  [:require clojure.main]
+  [:use [aprint.core]
+        [colorize.core]])
 
 (defmacro local-bindings
   "Produces a map of the names of local bindings to their values."
@@ -112,6 +114,7 @@ values."
         (try
          (binding [level (inc level)]
            (clojure.main/repl
+            ;;:prompt #(print (str (blue "dr-") (red level) "-" (cyan counter#) " => "))
             :prompt #(print (str "dr-" level "-" counter# " => "))
             :eval eval-fn#
             :read dr-read
