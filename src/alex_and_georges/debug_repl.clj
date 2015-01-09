@@ -104,6 +104,9 @@ values."
     (= (.getCause exc) exit-dr-exception) (throw exit-dr-exception)
     :else (clojure.main/repl-caught exc)))
 
+(defn asource [what]
+  (aprint (read-string (with-out-str (clojure.repl/source what)))))
+
 (defmacro debug-repl
   "Starts a REPL with the local bindings available."
   ([]
@@ -114,10 +117,10 @@ values."
         (try
          (binding [level (inc level)]
            (clojure.main/repl
-            ;;:prompt #(print (str (blue "dr-") (red level) "-" (cyan counter#) " => "))
             :prompt #(print (str (red "dr-") (blue level) "-" (cyan counter#) " => "))
             :eval eval-fn#
             :read dr-read
+            :print #(aprint %)
             :caught caught))
          (catch Exception e#
            (cond
